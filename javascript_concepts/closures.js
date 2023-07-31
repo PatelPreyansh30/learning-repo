@@ -1,22 +1,18 @@
 // Reference: https://www.geeksforgeeks.org/closure-in-javascript/
 
-// Outer function
-function outer() {
-  function create_Closure(val) {
-    return function () {
-      return val;
-    };
+function outerFunc(x) {
+  function innerFunc(y) {
+    return x + y;
   }
-  let arr = [];
-  let i;
-  for (i = 0; i < 4; i++) {
-    arr[i] = create_Closure(i);
-  }
-  return arr;
+  return innerFunc;
 }
-let get_arr = outer();
 
-console.log(get_arr[0]());
-console.log(get_arr[1]());
-console.log(get_arr[2]());
-console.log(get_arr[3]());
+let plusOne = outerFunc(1);
+let plusTen = outerFunc(10);
+
+console.log(plusOne(10));
+console.log(plusTen(10));
+
+// In JavaScript, if you declare a function within another function, then the local variables can remain accessible after returning from the function you called.
+
+// A closure is a stack frame which is allocated when a function starts its execution, and not freed after the function returns (as if a 'stack frame' were allocated on the heap rather than the stack!). In JavaScript, you can think of a function reference variable as having both a pointer to a function as well as a hidden pointer to a closure.
